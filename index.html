@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>MediFind • Bangalore Pharmacy Finder</title>
+    
+    <!-- Leaflet CSS + JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- App CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ==================== SPLASH SCREEN ==================== -->
+<div id="splashScreen" class="screen splash-screen active">
+    <div class="splash-logo">
+        <i class="fas fa-capsules"></i>
+    </div>
+    <div class="splash-title">MediFind</div>
+    <div class="splash-tagline">Find Your Medicine. Fast. From Anywhere.</div>
+    <div class="splash-tagline" style="font-size: 0.8rem;">📍 Serving Bangalore</div>
+    <div class="loading-bar">
+        <div class="loading-progress"></div>
+    </div>
+</div>
+
+<!-- ==================== HOME SCREEN ==================== -->
+<div id="homeScreen" class="screen">
+    <div class="app-header">
+        <div class="header-title"><i class="fas fa-capsules"></i> MediFind - Bangalore</div>
+    </div>
+    <div class="home-container scroll-content">
+        <div class="welcome-card">
+            <h3>Welcome to Bengaluru! 👋</h3>
+            <p>Find medicines near you instantly across Indiranagar, Koramangala, MG Road & more</p>
+        </div>
+        
+        <div class="search-bar-large">
+            <input type="text" id="homeSearchInput" placeholder="Search for medicine... (e.g., Paracetamol, Metformin)">
+            <button onclick="searchFromHome()"><i class="fas fa-search"></i> Search</button>
+        </div>
+        
+        <div class="quick-actions">
+            <div class="action-card" onclick="showScreen('prescriptionScreen')">
+                <i class="fas fa-camera"></i>
+                <div>Upload Prescription</div>
+            </div>
+            <div class="action-card" onclick="showScreen('emergencyScreen')">
+                <i class="fas fa-ambulance"></i>
+                <div>Emergency Mode</div>
+            </div>
+            <div class="action-card" onclick="showScreen('profileScreen')">
+                <i class="fas fa-user"></i>
+                <div>My Profile</div>
+            </div>
+            <div class="action-card" onclick="showScreen('alternativesScreen')">
+                <i class="fas fa-exchange-alt"></i>
+                <div>Alternatives</div>
+            </div>
+        </div>
+        
+        <div class="map-view">
+            <div id="homeMap"></div>
+        </div>
+        
+        <div style="margin-top: 1rem;">
+            <h4>📍 Pharmacies Near You in Bangalore</h4>
+            <div id="nearbyPharmaciesList"></div>
+        </div>
+    </div>
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="showScreen('homeScreen')">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-item" onclick="showScreen('prescriptionScreen')">
+            <i class="fas fa-camera"></i>
+            <span>Upload</span>
+        </div>
+        <div class="nav-item" onclick="showScreen('resultsScreen')">
+            <i class="fas fa-search"></i>
+            <span>Results</span>
+        </div>
+        <div class="nav-item" onclick="showScreen('profileScreen')">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== PRESCRIPTION UPLOAD SCREEN ==================== -->
+<div id="prescriptionScreen" class="screen">
+    <div class="app-header">
+        <button class="back-btn" onclick="showScreen('homeScreen')"><i class="fas fa-arrow-left"></i></button>
+        <div class="header-title">Upload Prescription</div>
+    </div>
+    <div class="upload-container scroll-content">
+        <div class="upload-box" onclick="document.getElementById('prescriptionFile').click()">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <h3>Click to Upload</h3>
+            <p>Upload a photo of your prescription</p>
+            <input type="file" id="prescriptionFile" accept="image/*" style="display: none;" onchange="handlePrescriptionUpload(this)">
+        </div>
+        <div id="prescriptionPreview"></div>
+        <div id="extractedInfo" class="extracted-medicine" style="display: none;">
+            <i class="fas fa-microchip"></i> <strong>AI Extracted:</strong>
+            <div id="extractedMedicineName"></div>
+            <button class="directions-btn" style="background: #38a169; margin-top: 0.5rem;" onclick="searchExtractedMedicine()">Search This Medicine →</button>
+        </div>
+    </div>
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="showScreen('homeScreen')"><i class="fas fa-home"></i><span>Home</span></div>
+        <div class="nav-item active" onclick="showScreen('prescriptionScreen')"><i class="fas fa-camera"></i><span>Upload</span></div>
+        <div class="nav-item" onclick="showScreen('resultsScreen')"><i class="fas fa-search"></i><span>Results</span></div>
+        <div class="nav-item" onclick="showScreen('profileScreen')"><i class="fas fa-user"></i><span>Profile</span></div>
+    </div>
+</div>
+
+<!-- ==================== SEARCH RESULTS SCREEN ==================== -->
+<div id="resultsScreen" class="screen">
+    <div class="app-header">
+        <button class="back-btn" onclick="showScreen('homeScreen')"><i class="fas fa-arrow-left"></i></button>
+        <div class="header-title">Search Results</div>
+    </div>
+    <div class="results-container scroll-content" id="resultsList">
+        <div style="text-align: center; padding: 2rem; color: #666;">
+            <i class="fas fa-search" style="font-size: 3rem;"></i>
+            <p>Search for a medicine to see results</p>
+        </div>
+    </div>
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="showScreen('homeScreen')"><i class="fas fa-home"></i><span>Home</span></div>
+        <div class="nav-item" onclick="showScreen('prescriptionScreen')"><i class="fas fa-camera"></i><span>Upload</span></div>
+        <div class="nav-item active" onclick="showScreen('resultsScreen')"><i class="fas fa-search"></i><span>Results</span></div>
+        <div class="nav-item" onclick="showScreen('profileScreen')"><i class="fas fa-user"></i><span>Profile</span></div>
+    </div>
+</div>
+
+<!-- ==================== PHARMACY DETAILS SCREEN ==================== -->
+<div id="detailsScreen" class="screen">
+    <div class="app-header">
+        <button class="back-btn" onclick="showScreen('resultsScreen')"><i class="fas fa-arrow-left"></i></button>
+        <div class="header-title">Pharmacy Details</div>
+    </div>
+    <div class="detail-container scroll-content" id="pharmacyDetails">
+        <!-- Dynamic content -->
+    </div>
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="showScreen('homeScreen')"><i class="fas fa-home"></i><span>Home</span></div>
+        <div class="nav-item" onclick="showScreen('prescriptionScreen')"><i class="fas fa-camera"></i><span>Upload</span></div>
+        <div class="nav-item" onclick="showScreen('resultsScreen')"><i class="fas fa-search"></i><span>Results</span></div>
+        <div class="nav-item" onclick="showScreen('profileScreen')"><i class="fas fa-user"></i><span>Profile</span></div>
+    </div>
+</div>
+
+<!-- ==================== EMERGENCY MODE SCREEN ==================== -->
+<div id="emergencyScreen" class="screen">
+    <div class="app-header">
+        <button class="back-btn" onclick="showScreen('homeScreen')"><i class="fas fa-arrow-left"></i></button>
+        <div class="header-title">Emergency Mode</div>
+    </div>
+    <div class="emergency-container scroll-content">
+        <div class="emergency-alert">
+            <i class="fas fa-ambulance" style="font-size: 3rem;"></i>
+            <h2>EMERGENCY</h2>
+            <p>Find nearest Bangalore pharmacy with your medicine</p>
+        </div>
+        
+        <div class="search-card" style="background: white; padding: 1.5rem; border-radius: 20px; margin-bottom: 1rem;">
+            <label>Medicine Name:</label>
+            <input type="text" id="emergencyMedicine" placeholder="e.g., Paracetamol" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #e2e8f0; border-radius: 12px;">
+            <button class="directions-btn" style="background: #dc2626;" onclick="findEmergencyPharmacy()">
+                <i class="fas fa-location-dot"></i> Find Nearest Pharmacy
+            </button>
+        </div>
+        
+        <div id="emergencyResult"></div>
+    </div>
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="showScreen('homeScreen')"><i class="fas fa-home"></i><span>Home</span></div>
+        <div class="nav-item" onclick="showScreen('prescriptionScreen')"><i class="fas fa-camera"></i><span>Upload</span></div>
+        <div class="nav-item" onclick="showScreen('resultsScreen')"><i class="fas fa-search"></i><span>Results</span></div>
+        <div class="nav-item active" onclick="showScreen('profileScreen')"><i class="fas fa-user"></i><span>Profile</span></div>
+    </div>
+</div>
+
+<!-- ==================== MEDICINE ALTERNATIVES SCREEN ==================== -->
+<div id="alternativesScreen" class="screen">
+    <div class="app-header">
+        <button class="back-btn" onclick="showScreen('homeScreen')"><i class="fas fa-arrow-left"></i></button>
+        <div class="header-title">Medicine Alternatives</div>
+    </div>
+    <div class="results-container scroll-content">
+        <div class="search-card" style="background: white; padding: 1.5rem; border-radius: 20px; margin-bottom: 1rem;">
+            <label>Enter Medicine Name:</label>
+            <input type="text" id="altMedicineInput" placeholder="e.g., Paracetamol" style="width: 100%; padding: 0.8rem; margin: 0.5rem 0; border: 2px solid #e2e8f0; border-radius: 12px;">
+            <button class="directions-btn" style="background: #1b5a7a;" onclick="showAlternatives()">Find Alternatives</button>
+        </div>
+        <div id="alternativesResult"></div>
+    </div>
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="showScreen('homeScreen')"><i class="fas fa-home"></i><span>Home</span></div>
+        <div class="nav-item" onclick="showScreen('prescriptionScreen')"><i class="fas fa-camera"></i><span>Upload</span></div>
+        <div class="nav-item" onclick="showScreen('resultsScreen')"><i class="fas fa-search"></i><span>Results</span></div>
+        <div class="nav-item active" onclick="showScreen('profileScreen')"><i class="fas fa-user"></i><span>Profile</span></div>
+    </div>
+</div>
+
+<!-- ==================== PROFILE / PRESCRIPTION HISTORY SCREEN ==================== -->
+<div id="profileScreen" class="screen">
+    <div class="app-header">
+        <button class="back-btn" onclick="showScreen('homeScreen')"><i class="fas fa-arrow-left"></i></button>
+        <div class="header-title">My Profile</div>
+    </div>
+    <div class="profile-container scroll-content">
+        <div class="profile-card">
+            <i class="fas fa-user-circle" style="font-size: 4rem; color: #1b5a7a;"></i>
+            <h3>Ramesh Kumar</h3>
+            <p>ramesh.kumar@example.com</p>
+            <p>+91 98765 43210</p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem;">📍 Bangalore, India</p>
+        </div>
+        
+        <h3><i class="fas fa-history"></i> Prescription History</h3>
+        <div id="prescriptionHistory"></div>
+        
+        <button class="directions-btn" style="background: #e67e22;" onclick="clearHistory()">
+            <i class="fas fa-trash"></i> Clear History
+        </button>
+    </div>
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="showScreen('homeScreen')"><i class="fas fa-home"></i><span>Home</span></div>
+        <div class="nav-item" onclick="showScreen('prescriptionScreen')"><i class="fas fa-camera"></i><span>Upload</span></div>
+        <div class="nav-item" onclick="showScreen('resultsScreen')"><i class="fas fa-search"></i><span>Results</span></div>
+        <div class="nav-item active" onclick="showScreen('profileScreen')"><i class="fas fa-user"></i><span>Profile</span></div>
+    </div>
+</div>
+
+<!-- App Scripts -->
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

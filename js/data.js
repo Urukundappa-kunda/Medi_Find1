@@ -1,0 +1,423 @@
+// ============ BANGALORE PHARMACIES DATA ============
+// Realistic pharmacy locations across Bangalore
+    
+const pharmacies = [
+    { 
+        id: 1, 
+        name: "Apollo Pharmacy - Indiranagar", 
+        lat: 12.9784, 
+        lng: 77.6408, 
+        address: "100 Feet Road, Indiranagar, Bangalore - 560038",
+        phone: "+91 80 2520 1234", 
+        timing: "8 AM - 10 PM",
+        area: "Indiranagar"
+    },
+    { 
+        id: 2, 
+        name: "MedPlus - Koramangala", 
+        lat: 12.9352, 
+        lng: 77.6245, 
+        address: "5th Block, Koramangala, Bangalore - 560095",
+        phone: "+91 80 2553 4567", 
+        timing: "24 Hours",
+        area: "Koramangala"
+    },
+    { 
+        id: 3, 
+        name: "Wellness Forever - MG Road", 
+        lat: 12.9752, 
+        lng: 77.6069, 
+        address: "MG Road, Opposite Metro Station, Bangalore - 560001",
+        phone: "+91 80 2227 8901", 
+        timing: "9 AM - 11 PM",
+        area: "MG Road"
+    },
+    { 
+        id: 4, 
+        name: "Guardian Pharmacy - Jayanagar", 
+        lat: 12.9308, 
+        lng: 77.5805, 
+        address: "4th Block, Jayanagar, Bangalore - 560011",
+        phone: "+91 80 2663 2345", 
+        timing: "8 AM - 9 PM",
+        area: "Jayanagar"
+    },
+    { 
+        id: 5, 
+        name: "Netmeds Express - Whitefield", 
+        lat: 12.9698, 
+        lng: 77.7499, 
+        address: "ITPL Main Road, Whitefield, Bangalore - 560066",
+        phone: "+91 80 2845 6789", 
+        timing: "8 AM - 10 PM",
+        area: "Whitefield"
+    },
+    { 
+        id: 6, 
+        name: "1mg Pharmacy - HSR Layout", 
+        lat: 12.9120, 
+        lng: 77.6415, 
+        address: "27th Main Road, HSR Layout, Bangalore - 560102",
+        phone: "+91 80 2570 1234", 
+        timing: "24 Hours",
+        area: "HSR Layout"
+    },
+    { 
+        id: 7, 
+        name: "Jan Aushadhi Kendra - Malleshwaram", 
+        lat: 13.0068, 
+        lng: 77.5690, 
+        address: "Sampige Road, Malleshwaram, Bangalore - 560003",
+        phone: "+91 80 2345 6789", 
+        timing: "9 AM - 8 PM",
+        area: "Malleshwaram"
+    },
+    { 
+        id: 8, 
+        name: "City Pharmacy - Electronic City", 
+        lat: 12.8399, 
+        lng: 77.6770, 
+        address: "Neeladri Nagar, Electronic City, Bangalore - 560100",
+        phone: "+91 80 2789 0123", 
+        timing: "8 AM - 10 PM",
+        area: "Electronic City"
+    },
+    { 
+        id: 9, 
+        name: "Health & Glow - Bannerghatta Road", 
+        lat: 12.8987, 
+        lng: 77.5971, 
+        address: "Bannerghatta Main Road, Bangalore - 560076",
+        phone: "+91 80 2658 4567", 
+        timing: "10 AM - 9 PM",
+        area: "Bannerghatta"
+    },
+    { 
+        id: 10, 
+        name: "Sai Pharmacy - Yelahanka", 
+        lat: 13.1007, 
+        lng: 77.5963, 
+        address: "Yelahanka New Town, Bangalore - 560064",
+        phone: "+91 80 2846 7890", 
+        timing: "8 AM - 9 PM",
+        area: "Yelahanka"
+    },
+    { 
+        id: 11, 
+        name: "MedPlus - Marathahalli", 
+        lat: 12.9552, 
+        lng: 77.7011, 
+        address: "Marathahalli Bridge, Bangalore - 560037",
+        phone: "+91 80 2523 4567", 
+        timing: "24 Hours",
+        area: "Marathahalli"
+    },
+    { 
+        id: 12, 
+        name: "Apollo Pharmacy - BTM Layout", 
+        lat: 12.9166, 
+        lng: 77.6101, 
+        address: "BTM 1st Stage, Bangalore - 560068",
+        phone: "+91 80 2667 8901", 
+        timing: "8 AM - 10 PM",
+        area: "BTM Layout"
+    }
+];
+
+// Stock database for Bangalore pharmacies
+// ============ EXPANDED STOCK DATABASE FOR BANGALORE PHARMACIES ============
+// Now includes 100+ medicines across all categories
+
+const stockDB = {
+// === PAIN RELIEVERS & FEVER ===
+"paracetamol": [1, 2, 3, 4, 6, 8, 11],
+"crocin": [1, 3, 5, 7, 10],
+"dolo": [2, 4, 6, 9, 12],
+"calpol": [1, 3, 6, 8, 11],
+"ibuprofen": [2, 3, 6, 9, 12],
+"brufen": [2, 4, 7, 11],
+"aspirin": [1, 4, 7, 11],
+"ecospirin": [1, 4, 7],
+"combiflam": [2, 5, 8, 11],
+"flexon": [3, 6, 9, 12],
+"nimulid": [1, 4, 8, 10],
+"nimesulide": [1, 4, 8, 10],
+"diclofenac": [2, 5, 7, 11],
+"voveran": [2, 5, 7, 11],
+"mefenamic acid": [3, 6, 9, 12],
+"meftal": [3, 6, 9, 12],
+
+// === ANTIBIOTICS ===
+"amoxicillin": [1, 3, 6, 8, 12],
+"moxikind": [1, 3, 6, 8],
+"clavam": [2, 4, 7, 11],
+"augmentin": [2, 4, 7, 11],
+"azithromycin": [2, 4, 9, 11],
+"azee": [2, 4, 9, 11],
+"azicip": [2, 4, 9],
+"cefixime": [1, 5, 8, 12],
+"taxim": [1, 5, 8, 12],
+"cefpodoxime": [3, 6, 10],
+"gudcef": [3, 6, 10],
+"ciprofloxacin": [2, 5, 7, 11],
+"ciprobid": [2, 5, 7],
+"levofloxacin": [1, 4, 8, 12],
+"levoquin": [1, 4, 8],
+"doxycycline": [3, 6, 9],
+"clindamycin": [2, 5, 8, 11],
+"metronidazole": [1, 4, 7, 10],
+"flagyl": [1, 4, 7, 10],
+"norfloxacin": [3, 6, 9, 12],
+
+// === DIABETES MEDICATIONS ===
+"metformin": [2, 5, 7, 11],
+"glycomet": [2, 5, 11],
+"formin": [2, 5, 7],
+"glimepiride": [1, 4, 8, 12],
+"glimi": [1, 4, 8],
+"glipizide": [3, 6, 10],
+"pioglitazone": [2, 5, 9],
+"pioz": [2, 5, 9],
+"sitagliptin": [1, 4, 8],
+"januvia": [1, 4, 8],
+"vildagliptin": [3, 6, 11],
+"galvus": [3, 6, 11],
+"linagliptin": [2, 7, 10],
+"trazenta": [2, 7, 10],
+"empagliflozin": [1, 5, 9],
+"jardiance": [1, 5, 9],
+"dapagliflozin": [3, 8, 12],
+"forxiga": [3, 8, 12],
+"insulin": [2, 6, 8, 10],
+"humalog": [2, 6, 8],
+"novorapid": [2, 6, 8],
+"lantus": [2, 6, 10],
+"basalog": [2, 6, 10],
+
+// === BLOOD PRESSURE MEDICATIONS ===
+"amlodipine": [3, 5, 8, 10],
+"amlovas": [3, 5, 8],
+"losartan": [3, 5, 8, 10],
+"losacar": [3, 5, 8],
+"telmisartan": [1, 4, 7, 11],
+"telma": [1, 4, 7, 11],
+"enalapril": [2, 6, 9, 12],
+"lisinopril": [3, 5, 8],
+"ramipril": [1, 4, 7, 10],
+"cardace": [1, 4, 7],
+"metoprolol": [2, 5, 8, 11],
+"betaloc": [2, 5, 8],
+"atenolol": [3, 6, 9, 12],
+"aten": [3, 6, 9],
+"clonidine": [1, 4, 7],
+"nifedipine": [2, 5, 8, 11],
+"nicardia": [2, 5, 8],
+
+// === CHOLESTEROL MEDICATIONS ===
+"atorvastatin": [1, 4, 7, 11],
+"lipitor": [1, 4, 7],
+"atorva": [1, 4, 7],
+"rosuvastatin": [2, 5, 8, 12],
+"rozucor": [2, 5, 8],
+"crestor": [2, 5, 8],
+"simvastatin": [3, 6, 9],
+"simvotin": [3, 6, 9],
+"pravastatin": [1, 4, 10],
+"pitavastatin": [2, 5, 11],
+
+// === STOMACH & DIGESTIVE ===
+"omeprazole": [2, 6, 9, 12],
+"omee": [2, 6, 9],
+"pantoprazole": [1, 4, 7, 11],
+"pantocid": [1, 4, 7, 11],
+"rabeprazole": [3, 5, 8, 10],
+"rabekind": [3, 5, 8],
+"esomeprazole": [2, 6, 9],
+"nexpro": [2, 6, 9],
+"ranitidine": [1, 4, 7, 12],
+"rantac": [1, 4, 7],
+"famotidine": [3, 5, 8, 11],
+"domperidone": [2, 6, 9, 12],
+"domstal": [2, 6, 9],
+"ondansetron": [1, 4, 7, 10],
+"vomikind": [1, 4, 7],
+"dicyclomine": [3, 6, 9],
+"cyclomine": [3, 6, 9],
+
+// === ALLERGY & ANTIHISTAMINES ===
+"cetirizine": [1, 3, 5, 7, 9, 12],
+"cetzine": [1, 3, 5, 7],
+"levocetirizine": [2, 4, 6, 8, 10],
+"levozine": [2, 4, 6, 8],
+"loratadine": [1, 3, 5, 9, 11],
+"lorfast": [1, 3, 5],
+"fexofenadine": [2, 4, 7, 10, 12],
+"allegra": [2, 4, 7, 10],
+"promethazine": [3, 6, 8],
+"phenergan": [3, 6, 8],
+
+// === COLD & COUGH ===
+"cough syrup": [3, 6, 8, 10],
+"benadryl": [3, 6, 8],
+"corex": [1, 4, 7, 11],
+"ascoril": [2, 5, 9, 12],
+"ambroxol": [1, 4, 7, 10],
+"ambrodil": [1, 4, 7],
+"bromhexine": [2, 5, 8, 11],
+"guff": [2, 5, 8],
+"dextromethorphan": [3, 6, 9],
+"phenylephrine": [1, 4, 7, 10],
+"sinarest": [2, 5, 8, 11],
+"coldact": [3, 6, 9, 12],
+
+// === VITAMINS & SUPPLEMENTS ===
+"vitamin d3": [1, 4, 7, 11],
+"calcium": [2, 5, 9, 12],
+"calcium d3": [2, 5, 9, 12],
+"calciquick": [2, 5, 9],
+"vitamin b12": [1, 3, 6, 8, 10],
+"mecobalamin": [1, 3, 6, 8],
+"neurobion": [2, 4, 7, 11],
+"vitamin c": [1, 3, 5, 7, 9, 11],
+"limcee": [1, 3, 5, 7],
+"zinc": [2, 4, 6, 8, 10],
+"zincovit": [2, 4, 6, 8],
+"multivitamin": [1, 3, 5, 7, 9, 11],
+"supradyn": [1, 3, 5, 7],
+"becadexamin": [2, 4, 6, 8],
+"folic acid": [1, 3, 5, 7, 9],
+"folvite": [1, 3, 5, 7],
+"iron": [2, 4, 6, 8, 10],
+"ferrous": [2, 4, 6, 8],
+"omega 3": [3, 6, 9, 12],
+"fish oil": [3, 6, 9],
+
+// === SKIN CARE ===
+"clotrimazole": [1, 4, 7, 10],
+"canesten": [1, 4, 7],
+"miconazole": [2, 5, 8, 11],
+"terbinafine": [3, 6, 9, 12],
+"lamisil": [3, 6, 9],
+"betamethasone": [1, 4, 7, 10],
+"betnovate": [1, 4, 7],
+"hydrocortisone": [2, 5, 8],
+"calamine": [3, 6, 9, 12],
+"caladryl": [3, 6, 9],
+"adapalene": [1, 4, 7],
+"clindamycin gel": [2, 5, 8, 11],
+"benzoyl peroxide": [3, 6, 9],
+"permethrin": [1, 4, 7, 10],
+
+// === RESPIRATORY / ASTHMA ===
+"salbutamol": [1, 3, 6, 8, 11],
+"asthalin": [1, 3, 6, 8],
+"levosalbutamol": [2, 4, 7, 10],
+"levolin": [2, 4, 7, 10],
+"budesonide": [3, 5, 8, 12],
+"budez": [3, 5, 8],
+"montelukast": [1, 4, 7, 11],
+"montair": [1, 4, 7, 11],
+"theophylline": [2, 5, 9],
+"deriphyllin": [2, 5, 9],
+
+// === EYE & EAR DROPS ===
+"ciprofloxacin eye drop": [1, 4, 7, 10],
+"ciprodrop": [1, 4, 7],
+"moxifloxacin eye drop": [2, 5, 8, 11],
+"moxydrop": [2, 5, 8],
+"tobramycin eye drop": [3, 6, 9],
+"tobradrop": [3, 6, 9],
+"ketorolac eye drop": [1, 4, 7],
+"ketorol": [1, 4, 7],
+"carboxymethylcellulose": [2, 5, 8, 11],
+"refresh tears": [2, 5, 8],
+"ear drops": [3, 6, 9, 12],
+"waxsol": [3, 6, 9],
+
+// === MENTAL HEALTH ===
+"fluoxetine": [1, 4, 7, 11],
+"fludac": [1, 4, 7],
+"sertraline": [2, 5, 8, 12],
+"serlift": [2, 5, 8],
+"escitalopram": [3, 6, 9],
+"nexito": [3, 6, 9],
+"alprazolam": [1, 4, 7, 10],
+"alprax": [1, 4, 7],
+"clonazepam": [2, 5, 8],
+"clonotril": [2, 5, 8],
+
+// === OTHER COMMON MEDICINES ===
+"thyroxine": [2, 5, 8, 11],
+"thyronorm": [2, 5, 8],
+"eltroxin": [2, 5, 8],
+"ursodeoxycholic acid": [1, 4, 7],
+"udiliv": [1, 4, 7],
+"silymarin": [3, 6, 9, 12],
+"liv 52": [3, 6, 9],
+"glucosamine": [1, 4, 7, 10],
+"jointace": [1, 4, 7],
+"melatonin": [2, 5, 8, 11],
+"sleepwell": [2, 5, 8],
+"orlistat": [3, 6, 9],
+"obetrol": [3, 6, 9]
+};
+
+// ============ EXPANDED ALTERNATIVES DATABASE ============
+const alternativesDB = {
+"paracetamol": ["Crocin 500mg", "Dolo 650mg", "Tylenol", "Calpol 500mg", "Pacimol"],
+"crocin": ["Paracetamol 500mg", "Dolo 650mg", "Calpol", "Pacimol"],
+"dolo": ["Paracetamol 500mg", "Crocin", "Calpol", "Tylenol"],
+"calpol": ["Paracetamol 500mg", "Crocin", "Dolo 650mg"],
+"ibuprofen": ["Brufen 400mg", "Motrin", "Advil", "Ibugesic", "Combiflam"],
+"brufen": ["Ibuprofen 400mg", "Motrin", "Advil", "Ibugesic"],
+"aspirin": ["Ecosprin", "Disprin", "Micropirin", "Aviprin"],
+"combiflam": ["Ibuprofen + Paracetamol", "Flexon", "Brufen + Paracetamol"],
+
+"amoxicillin": ["Moxikind 500mg", "Clavam", "Augmentin", "Amoxil", "Novamox"],
+"moxikind": ["Amoxicillin 500mg", "Clavam", "Augmentin"],
+"azithromycin": ["Zithromax", "Azee 500mg", "Aziwok", "Azicip", "Azithral"],
+"azee": ["Azithromycin 500mg", "Zithromax", "Azicip"],
+"cefixime": ["Taxim O", "Cefspan", "Zifi", "Omnicef"],
+
+"metformin": ["Glycomet 500mg", "Formin", "Glucophage", "Metlong", "Metpure"],
+"glycomet": ["Metformin 500mg", "Formin", "Glucophage", "Metpure"],
+"glimepiride": ["Glimi", "Amaryl", "Zoryl", "Glimp"],
+"insulin": ["Humalog", "NovoRapid", "Lantus", "Basalog", "Insugen"],
+
+"amlodipine": ["Amcard", "Amtas", "Amlovas", "Stamlo", "Amlokind"],
+"losartan": ["Losacar", "Repace", "Cozaar", "Losakind"],
+"telmisartan": ["Telma", "Telvas", "Telmikind", "Telsartan"],
+
+"atorvastatin": ["Lipitor", "Atorva", "Storvas", "Atorsave", "Tulip"],
+"rosuvastatin": ["Rozucor", "Crestor", "Rosvas", "Rosutin"],
+
+"omeprazole": ["Omee", "Omez", "Ocid", "Omesec", "Prilosec"],
+"pantoprazole": ["Pantocid", "Pantodac", "Pan", "Pantakind"],
+"rabeprazole": ["Rabekind", "Rablet", "Razo", "Rabeloc"],
+
+"cetirizine": ["Levocetirizine", "Zyrtec", "Okacet", "Cetzine", "Alerid"],
+"levocetirizine": ["Levozyr", "Lecet", "Levozine", "Xyzal"],
+"loratadine": ["Lorfast", "Claritin", "Loridin", "Lomade"],
+
+"vitamin d3": ["Calcitriol", "D3 Must", "Rise D3", "Sun D3"],
+"calcium": ["Calciquick", "Calcium Sandoz", "Ostocal", "Calcimax"],
+"vitamin b12": ["Mecobalamin", "Neurobion", "Nurokind", "B12 Act"],
+
+"thyroxine": ["Thyronorm", "Eltroxin", "Thyrofit", "Thyropage"],
+"clotrimazole": ["Canesten", "Clotrin", "Candid", "Candiforce"],
+
+"montelukast": ["Montair", "Monticope", "Lukast", "Montus"],
+"salbutamol": ["Asthalin", "Ventolin", "Salair", "Asthavent"],
+
+"fluoxetine": ["Fludac", "Prodep", "Flunil", "Fluctin"],
+"sertraline": ["Serlift", "Zosert", "Sertima", "Daxid"],
+"alprazolam": ["Alprax", "Xanax", "Anxit", "Alzolam"],
+
+"ursodeoxycholic acid": ["Udiliv", "Ursocol", "Ursokind", "Livurso"],
+"silymarin": ["Liv 52", "Silymarin", "Livertone", "Silybon"],
+
+"glucosamine": ["Jointace", "Glucosal", "Osteo-Joint", "Glucozone"],
+"melatonin": ["Sleepwell", "Meloset", "Melocare", "Natra Sleep"],
+
+"orlistat": ["Obetrol", "Xenical", "Orlica", "Fatlock"]
+};

@@ -1,0 +1,361 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f0f4f8;
+    overflow-x: hidden;
+}
+
+/* Screen Container */
+.screen {
+    display: none;
+    min-height: 100vh;
+    width: 100%;
+    animation: fadeIn 0.3s ease;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== SPLASH SCREEN ========== */
+.splash-screen {
+    background: linear-gradient(135deg, #0b3b5f 0%, #1b5a7a 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+.splash-logo {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    animation: bounce 1s ease;
+}
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+.splash-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+.splash-tagline {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 3rem;
+}
+.loading-bar {
+    width: 200px;
+    height: 3px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+.loading-progress {
+    width: 0%;
+    height: 100%;
+    background: white;
+    animation: load 2s ease forwards;
+}
+@keyframes load {
+    to { width: 100%; }
+}
+
+/* ========== COMMON HEADER ========== */
+.app-header {
+    background: linear-gradient(135deg, #0b3b5f 0%, #1b5a7a 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.back-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+}
+.back-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+.header-title {
+    flex: 1;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* ========== HOME SCREEN ========== */
+.home-container {
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.welcome-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+}
+.search-bar-large {
+    background: white;
+    border-radius: 50px;
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.search-bar-large input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+}
+.search-bar-large button {
+    background: #1b5a7a;
+    border: none;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+}
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+.action-card {
+    background: white;
+    padding: 1rem;
+    border-radius: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.action-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.action-card i {
+    font-size: 2rem;
+    color: #1b5a7a;
+    margin-bottom: 0.5rem;
+}
+.map-view {
+    height: 400px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+#homeMap {
+    height: 100%;
+    width: 100%;
+}
+
+/* ========== PRESCRIPTION UPLOAD SCREEN ========== */
+.upload-container {
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.upload-box {
+    border: 3px dashed #90b4ce;
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+}
+.upload-box:hover {
+    border-color: #1b5a7a;
+    background: #f0f7fa;
+}
+.upload-box i {
+    font-size: 4rem;
+    color: #1b5a7a;
+    margin-bottom: 1rem;
+}
+.preview-image {
+    max-width: 100%;
+    border-radius: 12px;
+    margin-top: 1rem;
+}
+.extracted-medicine {
+    background: #e6f7ed;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-top: 1rem;
+}
+
+/* ========== SEARCH RESULTS ========== */
+.results-container {
+    padding: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.result-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-left: 4px solid #38a169;
+}
+.result-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ========== PHARMACY DETAILS ========== */
+.detail-container {
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.pharmacy-header {
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.info-row {
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+    display: flex;
+    gap: 1rem;
+}
+.directions-btn {
+    background: #4285f4;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 12px;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+/* ========== EMERGENCY MODE ========== */
+.emergency-container {
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+.emergency-alert {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: white;
+    padding: 2rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    animation: pulse 1s infinite;
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* ========== PROFILE SCREEN ========== */
+.profile-container {
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.profile-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.history-item {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 0.8rem;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+.nav-item {
+    text-align: center;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+.nav-item i {
+    font-size: 1.5rem;
+    color: #666;
+}
+.nav-item span {
+    font-size: 0.7rem;
+    display: block;
+    color: #666;
+}
+.nav-item.active i,
+.nav-item.active span {
+    color: #1b5a7a;
+}
+
+/* Scrollable content */
+.scroll-content {
+    padding-bottom: 80px;
+}
+
+.stock-badge {
+    background: #c6f6d5;
+    color: #22543d;
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 40px;
+    font-weight: 600;
+}
