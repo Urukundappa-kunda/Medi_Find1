@@ -153,14 +153,6 @@ function viewPharmacyDetails(pharmacyId) {
         </div>
         
         <div class="info-row">
-            <i class="fas fa-phone" style="font-size: 1.2rem;"></i>
-            <div>
-                <strong>Phone Number</strong><br>
-                ${pharmacy.phone}
-            </div>
-        </div>
-        
-        <div class="info-row">
             <i class="fas fa-clock" style="font-size: 1.2rem;"></i>
             <div>
                 <strong>Business Hours</strong><br>
